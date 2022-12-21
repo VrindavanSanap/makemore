@@ -1,0 +1,7 @@
+in the make more model 
+the basic build block in Value object
+a value object has four main components
+    data      ,what number does it represent 
+    children  ,what is this element made up of
+    grad      ,whats the gradient (ie slpe of the loss function with resp to the data of this value object)
+    _backward ,this function sets the gradient of the chidren of this value object
