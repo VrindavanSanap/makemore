@@ -1,0 +1,3 @@
+probs = counts * counts_sum_inv
+
+to find dcounts_sum_inv we need to understand "probs = counts * counts_sum_inv" which in this case is just simple multiplication we are just scaling the gradients by the counts

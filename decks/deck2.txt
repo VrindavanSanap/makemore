@@ -1,0 +1,41 @@
+We want to calculate gradient of logprobs with respect to loss
+To do that we need to understand what exactly does
+"loss=-logprobs[range(n),Yb].mean() " do 
+This like can be broken into 3 fundamental operations
+
+step1=-logprobs[range(n),Yb]
+step2=step1.sum()
+step3=step2/n
+What exactly are we doing in step 1
+    we are creating a list of probabilites that out model is
+    assiging to the correct answer
+What are we doing in the second step
+    we are taking the sum of the list generated in the first 
+    step
+What are we doing in the third step
+    we are dividing the sum of the list generated in the first 
+    step by the number of samples
+
+This leaves us with two conclusions 
+    1.The gradients of all logprobs with resp. to step1 which are 
+    not the correct answer are zero meaning whatever their value is it does not 
+    affect step1,where as the gradient of logprob of correct answer is exactly 1
+    2.The in the second step we are just adding the logprob of the correct answer so everyone has gradient exactly equal to one with resp to step2
+    3.The in the third step we are dividing the sum of the list generated in the first step by the number of samples so the gradient of each number is scaled down by the number of samples
+
+In summary
+    ds1/dlp={
+                =1 if correct answer
+                =0 if in correct answer
+            }
+    ds2/ds1={
+                =1*ds1/dlp 
+            }
+    ds3/ds2=(ds2/ds1)*(1/n)
+    ds3/ds1=(1*ds1/dlp)*(1/n)
+    ds3/lp={
+            =0 if incorrect answer
+            =1/n if correct answer
+            }
+            
+    

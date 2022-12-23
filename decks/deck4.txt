@@ -1,0 +1,3 @@
+logits = h @ W2 + b2
+
+what we want find is gradeint of h with respect to logits
